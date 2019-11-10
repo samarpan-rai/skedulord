@@ -110,8 +110,11 @@ def history(rows, failures, date, jobname):
         jobs = jobs[:rows]
     tbl = PrettyTable()
     tbl.field_names = ["stat", "jobname", "logfile"]
+
+    good = click.style("good", fg="green")
+    fail = click.style("fail", fg="red")
     for j in jobs:
-        tbl.add_row(['✅' if j['succeed'] else '❌', j["name"], j["log"], ])
+        tbl.add_row([good if j['succeed'] else fail, j["name"], j["log"], ])
     click.echo(tbl)
 
 
